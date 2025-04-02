@@ -4,7 +4,7 @@ def read_products(filename):
     products = []
     with open(filename, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
-        next(reader)  # Skip the header row
+        next(reader)  
         for row in reader:
             name, price, category = row
             products.append({'name': name, 'price': float(price), 'category': category})
@@ -14,9 +14,9 @@ def display_products_by_category(products, selected_category=None):
     categories = set(product['category'] for product in products)
     
     if selected_category:
-        categories = {selected_category}  # Filter to show only the selected category
+        categories = {selected_category}  
     
-    unique_idx = 1  # Start unique index for each product
+    unique_idx = 1  
     print("\nPreces pēc kategorijām:")
     
     for category in categories:
@@ -27,7 +27,7 @@ def display_products_by_category(products, selected_category=None):
         else:
             for product in filtered_products:
                 print(f"{unique_idx}. {product['name']} - {product['price']}€")
-                unique_idx += 1  # Increment the unique index for each product
+                unique_idx += 1  
 
 def add_to_cart(cart, products):
     try:
@@ -95,7 +95,7 @@ def main():
         
         choice = input("\nIzvēlies darbību (1-6): ")
 
-        if choice == '1' or choice == '3':  # Apvienota izvēle 1 un 3
+        if choice == '1' or choice == '3':  
             print("\nKategorijas:")
             categories = set(product['category'] for product in products)
             for idx, category in enumerate(categories, start=1):
@@ -106,7 +106,7 @@ def main():
                 if 1 <= category_choice <= len(categories):
                     selected_category = list(categories)[category_choice - 1]
                     display_products_by_category(products, selected_category)
-                    add_to_cart(cart, products)  # After displaying, ask to add product to cart
+                    add_to_cart(cart, products)  
                 else:
                     print("Nepareiza izvēle!")
             except ValueError:
