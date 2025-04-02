@@ -1,137 +1,128 @@
-class Product:
-    def __init__(self, name, price, category):
-        self.name = name
-        self.price = price
-        self.category = category
+import csv
 
-class Store:
-    def __init__(self):
-        self.products = [
-            Product("Dators", 1000, "Elektronika"), Product("Tālrunis", 500, "Elektronika"), Product("Austiņas", 100, "Elektronika"),
-            Product("Monitors", 250, "Elektronika"), Product("Tastatūra", 70, "Piederumi"), Product("Pele", 50, "Piederumi"),
-            Product("Printeris", 200, "Elektronika"), Product("Mikrofons", 120, "Piederumi"), Product("Webkamera", 80, "Piederumi"),
-            Product("USB zibatmiņa", 30, "Datu nesēji"), Product("Ārējais cietais disks", 150, "Datu nesēji"),
-            Product("Planšetdators", 600, "Elektronika"), Product("Portatīvais lādētājs", 40, "Piederumi"),
-            Product("Smartwatch", 300, "Elektronika"), Product("VR brilles", 400, "Elektronika"),
-            Product("Datora korpuss", 180, "Komponentes"), Product("Operatīvā atmiņa (RAM)", 130, "Komponentes"),
-            Product("Mātesplate", 250, "Komponentes"), Product("Procesors", 350, "Komponentes"),
-            Product("Videokarte", 800, "Komponentes"), Product("Barošanas bloks", 100, "Komponentes"),
-            Product("Dzesētājs", 60, "Komponentes"), Product("Tīkla maršrutētājs", 90, "Tīklošana"),
-            Product("Bluetooth austiņas", 150, "Elektronika"), Product("Spēļu kontrolieris", 200, "Piederumi"),
-            Product("Datora skaļruņi", 120, "Elektronika"), Product("HDMI kabelis", 25, "Piederumi"),
-            Product("Ethernet kabelis", 20, "Tīklošana"), Product("SD karte", 35, "Datu nesēji"),
-            Product("Kārtridžs printerim", 50, "Piederumi")
-        ]
-        self.cart = []
+def read_products(filename):
+    products = []
+    with open(filename, mode='r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip the header row
+        for row in reader:
+            name, price, category = row
+            products.append({'name': name, 'price': float(price), 'category': category})
+    return products
 
-    # Funkcija, kas izdrukā tekstu zaļā krāsā
-    def print_green(self, message):
-        return f"\033[32m{message}\033[0m"
-
-    # Funkcija, kas izdrukā tekstu dzeltenā krāsā
-    def print_yellow(self, message):
-        return f"\033[33m{message}\033[0m"
-
-    # Funkcija, kas izdrukā tekstu sarkanā krāsā
-    def print_red(self, message):
-        return f"\033[31m{message}\033[0m"
-
-    # Parāda produktus
-    def show_products(self, category=None):
-        if category:
-            filtered_products = [p for p in self.products if p.category == category]
-            for idx, product in enumerate(filtered_products, start=1):
-                print(f"{self.print_yellow(f'{idx}. {product.name}')} - {self.print_green(f'{product.price:.2f} EUR')}")
-            return filtered_products
-
-        categories = list(set(product.category for product in self.products))
-        print(self.print_green("Pieejamās kategorijas:"))
-        for idx, category in enumerate(categories, start=1):
-            print(f"{self.print_yellow(f'{idx}. {category}')}")
-
-        choice = input(self.print_yellow("Izvēlieties kategorijas numuru vai 'q', lai izietu: ")).strip()
-        if choice.lower() == 'q':
-            return None
-
-        if choice.isdigit():
-            category_index = int(choice)
-            if 1 <= category_index <= len(categories):
-                selected_category = categories[category_index - 1]
-                print(self.print_green(f"\nProdukti kategorijā: {selected_category}"))
-                return self.show_products(selected_category)
-            else:
-                print(self.print_red("Nederīgs kategorijas numurs!"))
+def display_products_by_category(products, selected_category=None):
+    categories = set(product['category'] for product in products)
+    
+    if selected_category:
+        categories = {selected_category}  # Filter to show only the selected category
+    
+    unique_idx = 1  # Start unique index for each product
+    print("\nPreces pēc kategorijām:")
+    
+    for category in categories:
+        print(f"\n{category}:")
+        filtered_products = [p for p in products if p['category'].lower() == category.lower()]
+        if not filtered_products:
+            print(f"Nav preču kategorijā: {category}")
         else:
-            print(self.print_red("Lūdzu, ievadiet derīgu skaitli vai 'q', lai izietu."))
-        return None
+            for product in filtered_products:
+                print(f"{unique_idx}. {product['name']} - {product['price']}€")
+                unique_idx += 1  # Increment the unique index for each product
 
-    # Pievieno produktus grozam
-    def add_to_cart(self):
-        while True:
-            selected_products = self.show_products()
-            if not selected_products:
-                return
-
-            choice = input(self.print_yellow("Ievadiet produkta numuru vai 'q', lai izietu: ")).strip()
-
-            if choice.lower() == 'q':
-                break
-
-            if choice.isdigit():
-                product_index = int(choice)
-                if 1 <= product_index <= len(selected_products):
-                    self.cart.append(selected_products[product_index - 1])
-                    print(self.print_green(f"{selected_products[product_index - 1].name} pievienots grozam."))
-                else:
-                    print(self.print_red("Nederīgs produkta numurs!"))
-            else:
-                print(self.print_red("Lūdzu, ievadiet derīgu skaitli vai 'q', lai izietu."))
-
-    # Apskatīt grozu
-    def view_cart(self):
-        if not self.cart:
-            print(self.print_red("Jūsu grozs ir tukšs!"))
+def add_to_cart(cart, products):
+    try:
+        choice = int(input("\nIzvēlies preci (ievadi skaitli): "))
+        if 1 <= choice <= len(products):
+            product = products[choice - 1]
+            cart.append(product)
+            print(f"{product['name']} ir pievienota grozam!")
         else:
-            print(self.print_green("\nJūsu grozs:"))
-            total = 0
-            for product in self.cart:
-                print(f"{self.print_yellow(f'{product.name}')} - {self.print_green(f'{product.price:.2f} EUR')}")
-                total += product.price
-            print(f"Kopējā summa: {self.print_green(f'{total:.2f} EUR')}")
+            print("Nepareiza izvēle!")
+    except ValueError:
+        print("Lūdzu, ievadi skaitli!")
 
-    # Apmaksāt
-    def checkout(self):
-        if not self.cart:
-            print(self.print_red("Jūsu grozs ir tukšs! Nekas netika iegādāts."))
+def remove_from_cart(cart):
+    if not cart:
+        print("Groziņš ir tukšs.")
+        return
+    
+    print("\nTavs grozs:")
+    for idx, product in enumerate(cart, start=1):
+        print(f"{idx}. {product['name']} - {product['price']}€")
+    
+    try:
+        choice = int(input("\nIzvēlies preci, kuru vēlies noņemt no groza (ievadi skaitli): "))
+        if 1 <= choice <= len(cart):
+            product = cart.pop(choice - 1)
+            print(f"{product['name']} ir noņemta no groza.")
         else:
-            self.view_cart()
-            print(self.print_green("Paldies par pirkumu!"))
-            self.cart = []
+            print("Nepareiza izvēle!")
+    except ValueError:
+        print("Lūdzu, ievadi skaitli!")
+
+def view_cart(cart):
+    if not cart:
+        print("Tavs grozs ir tukšs.")
+    else:
+        print("\nTavs grozs:")
+        total = 0
+        for product in cart:
+            print(f"{product['name']} - {product['price']}€")
+            total += product['price']
+        print(f"\nKopējā summa: {total}€")
+
+def purchase_product(cart):
+    if not cart:
+        print("Groziņš ir tukšs!")
+        return
+    
+    total = sum(item['price'] for item in cart)
+    print(f"\nTavs kopējais pirkums ir: {total}€")
+    print("Paldies par iepirkšanos!")
 
 def main():
-    store = Store()
+    products = read_products('products.csv')
+    cart = []
+
     while True:
-        print(store.print_green("\n1. Apskatīt produktus"))
-        print(store.print_green("2. Pievienot produktu grozam"))
-        print(store.print_green("3. Apskatīt grozu"))
-        print(store.print_green("4. Apmaksāt"))
-        print(store.print_green("5. Iziet"))
+        print("\n--- Mūsu veikals ---")
+        print("1. Apskatīt preces")
+        print("2. Apskatīt grozu")
+        print("3. Pievienot preci grozam")
+        print("4. Noņemt preci no groza")
+        print("5. Veikt pirkumu")
+        print("6. Iziet")
+        
+        choice = input("\nIzvēlies darbību (1-6): ")
 
-        choice = input(store.print_yellow("Izvēlieties darbību: ")).strip()
-
-        if choice == "1":
-            store.show_products()
-        elif choice == "2":
-            store.add_to_cart()
-        elif choice == "3":
-            store.view_cart()
-        elif choice == "4":
-            store.checkout()
-        elif choice == "5":
-            print(store.print_green("Paldies! Uz redzēšanos!"))
+        if choice == '1' or choice == '3':  # Apvienota izvēle 1 un 3
+            print("\nKategorijas:")
+            categories = set(product['category'] for product in products)
+            for idx, category in enumerate(categories, start=1):
+                print(f"{idx}. {category}")
+            category_choice = input("\nIzvēlies kategoriju (ievadi skaitli): ")
+            try:
+                category_choice = int(category_choice)
+                if 1 <= category_choice <= len(categories):
+                    selected_category = list(categories)[category_choice - 1]
+                    display_products_by_category(products, selected_category)
+                    add_to_cart(cart, products)  # After displaying, ask to add product to cart
+                else:
+                    print("Nepareiza izvēle!")
+            except ValueError:
+                print("Lūdzu, ievadi skaitli!")
+        elif choice == '2':
+            view_cart(cart)
+        elif choice == '4':
+            remove_from_cart(cart)
+        elif choice == '5':
+            purchase_product(cart)
+            break
+        elif choice == '6':
+            print("Paldies, ka apmeklējāt mūsu veikalu!")
             break
         else:
-            print(store.print_red("Nederīga izvēle, mēģiniet vēlreiz!"))
+            print("Nepareiza izvēle! Lūdzu, izvēlies no 1 līdz 6.")
 
 if __name__ == "__main__":
     main()
