@@ -1,27 +1,21 @@
-name,price,category,sizes
-T-krekls,19.99,krekli,S=3;M=5;L=2
-Krekliņš,14.99,krekli,S=4;M=6;L=3
-Garroku krekls,24.99,krekli,S=2;M=3;L=2
-Polo krekls,29.99,krekli,S=5;M=7;L=5
-Vasaras tops,17.99,krekli,S=6;M=5;L=1
-Šorti,19.99,šorti,S=2;M=4;L=4
-Džinsu šorti,22.99,šorti,S=3;M=2;L=3
-Sporta šorti,18.49,šorti,S=4;M=5;L=4
-Lina šorti,25.99,šorti,S=2;M=2;L=1
-Džemperis,59.99,džemperi,S=2;M=3;L=2
-Jaka,59.99,džemperi,S=1;M=2;L=3
-Rudens jaka,79.99,džemperi,S=0;M=2;L=1
-Vīriešu džemperis,49.99,džemperi,S=3;M=3;L=3
-Sieviešu džemperis ar kapuci,54.99,džemperi,S=4;M=5;L=2
-Džinsi,39.99,bikses,S=2;M=4;L=4
-Bikses,49.99,bikses,S=3;M=5;L=3
-Treniņbikses,24.99,bikses,S=5;M=6;L=2
-Klasiskās bikses,44.99,bikses,S=1;M=2;L=3
-Legingi,19.99,bikses,S=6;M=5;L=2
-Ziemas josta,25.99,aksesuāri,OneSize=10
-Ziemas cepure,18.99,aksesuāri,OneSize=8
-Ziemas cimdu komplekts,22.99,aksesuāri,OneSize=6
-Šalle,15.99,aksesuāri,OneSize=9
-Vasaras cepure,14.99,aksesuāri,OneSize=7
-Auduma josta,12.99,aksesuāri,OneSize=5
-Galvas lenta,9.99,aksesuāri,OneSize=10
+name,price,category,sizes,colors
+T-krekls James Harden dizains,22.95,krekli,S=3;M=5;L=2,Krēmkrāsa
+T-krekls Ant-man dizains,22.95,krekli,S=4;M=6;L=3,Balts
+Longsleeve Kyrie krekls,29.95,krekli,S=2;M=3;L=2,melns
+Kompresijas krekls,19.95,krekli,S=5;M=7;L=5,Balts
+T-krekls ar izšūtu logo,24.95,krekli,S=6;M=5;L=1, melns
+Šorti ar zvaigžņu dizainu,19.99,šorti,S=2;M=4;L=4,Rozā
+Džinsu šorti ar izšūtu attēlu,22.99,šorti,S=3;M=2;L=3, melns
+Sporta šorti,18.49,šorti,S=4;M=5;L=4, Pelēki
+Lina šorti,25.99,šorti,S=2;M=2;L=1, Krēmkrāsa
+Džemperis,59.99,džemperi,S=2;M=3;L=2, balts|melns|zils|Rozā
+Jaka,59.99,džemperi,S=1;M=2;L=3, melns
+Rudens jaka,79.99,džemperi,S=0;M=2;L=1, Daduzkrāsains
+Džinsi,39.99,bikses,S=2;M=4;L=4, zils
+Bikses,49.99,bikses,S=3;M=5;L=3, melns
+Treniņbikses,24.99,bikses,S=5;M=6;L=2, pelēks
+Klasiskās bikses ar izšuvumu,44.99,bikses,S=1;M=2;L=3, pelēks 
+josta,25.99,aksesuāri,OneSize=10, melns
+cepure ar logo,18.99,aksesuāri,OneSize=8, melns|balts
+Zeķes ar logo,22.99,aksesuāri,OneSize=6, melns|balts
+Dad cap,14.99,aksesuāri,OneSize=7, melns|balts|pelēks

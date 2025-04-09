@@ -13,7 +13,8 @@ def read_products(filename):
                 'name': row['name'],
                 'price': float(row['price']),
                 'category': row['category'],
-                'sizes': sizes
+                'sizes': sizes,
+                'colors': row['colors'].split(',')
             })
     return products
 
@@ -34,14 +35,14 @@ def display_products_by_category(products, selected_category=None):
             print("Nav preču šajā kategorijā.")
             continue
 
-        # Izveido tabulas izskatu
-        print(f"{'#':<5}{'Nosaukums':<20}{'Cena':<10}{'Izmēri':<20}")
-        print("-" * 55)  # Pārrakstīt atdalītāju
+        print(f"{'#':<5}{'Nosaukums':<20}{'Cena':<10}{'Izmēri':<20}{'Krāsas':<30}")
+        print("-" * 85)
         for idx, product in enumerate(category_products, start=1):
             sizes_display = ", ".join(
                 f"{size} ({qty})" for size, qty in product['sizes'].items() if qty > 0
             ) or "Nav pieejams"
-            print(f"{idx:<5}{product['name']:<20}{product['price']:<10.2f}{sizes_display:<20}")
+            colors_display = ", ".join(product['colors'])
+            print(f"{idx:<5}{product['name']:<20}{product['price']:<10.2f}{sizes_display:<20}{colors_display:<30}")
         filtered.extend(category_products)
 
     return filtered
@@ -59,13 +60,19 @@ def add_to_cart(cart, products):
             print(f"Ir pieejami izmēri: {', '.join(available_sizes.keys())}")
             size_choice = input("Izvēlies izmēru: ").strip().upper()
             if size_choice in available_sizes:
+                print(f"Pieejamās krāsas: {', '.join(product['colors'])}")
+                color_choice = input("Izvēlies krāsu: ").strip()
+                if color_choice not in product['colors']:
+                    print("Nepareiza krāsa vai nav pieejama.")
+                    return
                 cart.append({
                     'name': product['name'],
                     'price': product['price'],
-                    'size': size_choice
+                    'size': size_choice,
+                    'color': color_choice
                 })
                 product['sizes'][size_choice] -= 1
-                print(f"{product['name']} ({size_choice}) ir pievienota grozam!")
+                print(f"{product['name']} ({size_choice}, {color_choice}) ir pievienota grozam!")
             else:
                 print("Nepareizs izmērs vai nav pieejams.")
         else:
@@ -79,16 +86,16 @@ def remove_from_cart(cart):
         return
 
     print("\nTavs grozs:")
-    print(f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Cena':<10}")
-    print("-" * 45)  # Pārrakstīt atdalītāju
+    print(f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Krāsa':<15}{'Cena':<10}")
+    print("-" * 60)
     for idx, item in enumerate(cart, start=1):
-        print(f"{idx:<5}{item['name']:<20}{item['size']:<10}{item['price']:<10.2f}")
+        print(f"{idx:<5}{item['name']:<20}{item['size']:<10}{item['color']:<15}{item['price']:<10.2f}")
 
     try:
         choice = int(input("\nIzvēlies preci, kuru vēlies noņemt no groza (ievadi skaitli): "))
         if 1 <= choice <= len(cart):
             removed = cart.pop(choice - 1)
-            print(f"{removed['name']} ({removed['size']}) ir noņemta no groza.")
+            print(f"{removed['name']} ({removed['size']}, {removed['color']}) ir noņemta no groza.")
         else:
             print("Nepareiza izvēle!")
     except ValueError:
@@ -100,11 +107,11 @@ def view_cart(cart):
         return
 
     print("\nTavs grozs:")
-    print(f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Cena':<10}")
-    print("-" * 45)  # Pārrakstīt atdalītāju
+    print(f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Krāsa':<15}{'Cena':<10}")
+    print("-" * 60)
     total = 0
     for idx, item in enumerate(cart, start=1):
-        print(f"{idx:<5}{item['name']:<20}{item['size']:<10}{item['price']:<10.2f}")
+        print(f"{idx:<5}{item['name']:<20}{item['size']:<10}{item['color']:<15}{item['price']:<10.2f}")
         total += item['price']
 
     print(f"\nKopējā summa: {total:.2f}€")
