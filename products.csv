@@ -1,31 +1,27 @@
-name,price,category
-T-krekls,19.99,Apģērbs
-Džinsi,39.99,Apģērbs
-Jaka,59.99,Apģērbs
-Cepure,12.99,Aksesuāri
-Austiņas,49.99,Elektronika
-Pulkstenis,99.99,Aksesuāri
-Tennis,34.99,Sports
-Treniņbikses,24.99,Apģērbs
-Krekliņš,14.99,Apģērbs
-Kaklarota,29.99,Aksesuāri
-Skrienošās kurpes,69.99,Sports
-Šalle,15.99,Aksesuāri
-Bikses,49.99,Apģērbs
-Rudens jaka,79.99,Apģērbs
-Somā,59.99,Aksesuāri
-Tūrisma zābaki,89.99,Sports
-Mugursoma,45.99,Aksesuāri
-Telefonu maks,19.99,Aksesuāri
-Gaismas ķēdes,20.99,Elektronika
-Powerbank,35.99,Elektronika
-Portatīvais dators,499.99,Elektronika
-Datorpele,15.99,Elektronika
-Ziemas josta,25.99,Apģērbs
-Ziemas cepure,18.99,Apģērbs
-Ziemas cimdu komplekts,22.99,Apģērbs
-Sporta apavi,89.99,Sports
-Komplekts ar rokassomu,69.99,Aksesuāri
-Datora statīvs,39.99,Elektronika
-Tālruņa turētājs,12.99,Elektronika
-Fotoaparāts,249.99,Elektronika
+name,price,category,sizes
+T-krekls,19.99,krekli,S=3;M=5;L=2
+Krekliņš,14.99,krekli,S=4;M=6;L=3
+Garroku krekls,24.99,krekli,S=2;M=3;L=2
+Polo krekls,29.99,krekli,S=5;M=7;L=5
+Vasaras tops,17.99,krekli,S=6;M=5;L=1
+Šorti,19.99,šorti,S=2;M=4;L=4
+Džinsu šorti,22.99,šorti,S=3;M=2;L=3
+Sporta šorti,18.49,šorti,S=4;M=5;L=4
+Lina šorti,25.99,šorti,S=2;M=2;L=1
+Džemperis,59.99,džemperi,S=2;M=3;L=2
+Jaka,59.99,džemperi,S=1;M=2;L=3
+Rudens jaka,79.99,džemperi,S=0;M=2;L=1
+Vīriešu džemperis,49.99,džemperi,S=3;M=3;L=3
+Sieviešu džemperis ar kapuci,54.99,džemperi,S=4;M=5;L=2
+Džinsi,39.99,bikses,S=2;M=4;L=4
+Bikses,49.99,bikses,S=3;M=5;L=3
+Treniņbikses,24.99,bikses,S=5;M=6;L=2
+Klasiskās bikses,44.99,bikses,S=1;M=2;L=3
+Legingi,19.99,bikses,S=6;M=5;L=2
+Ziemas josta,25.99,aksesuāri,OneSize=10
+Ziemas cepure,18.99,aksesuāri,OneSize=8
+Ziemas cimdu komplekts,22.99,aksesuāri,OneSize=6
+Šalle,15.99,aksesuāri,OneSize=9
+Vasaras cepure,14.99,aksesuāri,OneSize=7
+Auduma josta,12.99,aksesuāri,OneSize=5
+Galvas lenta,9.99,aksesuāri,OneSize=10
