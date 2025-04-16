@@ -24,7 +24,7 @@ def display_products_by_category(products, selected_category=None):
     if selected_category:
         categories = {selected_category}
 
-    print("\nPreces pēc kategorijām:")
+    print("\nPreces pēc kate1gorijām:")
     filtered = []
 
     for category in categories:
