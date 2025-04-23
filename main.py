@@ -1,11 +1,18 @@
-from shop import Shop
-from product import ProductCollection
+# main.py faila saturs
+
+from product import ProductCollection  # Importējam ProductCollection
+from shop import Shop  # Importējam Shop
 
 def main():
+    # Izveidojam ProductCollection objektu
     products = ProductCollection()
-    products.load_from_csv('products.csv')  # Ielādējam CSV
-    shop = Shop(products)  # Dodam Shop klasei pareizu objektu
-    shop.run()  # Sākam visu
+    products.load_from_csv('products.csv')  # Ielādējam produktus no CSV faila
+
+    # Izveidojam Shop objektu
+    shop = Shop(products)
+
+    # Sākam veikala darbību
+    shop.run()
 
 if __name__ == "__main__":
     main()

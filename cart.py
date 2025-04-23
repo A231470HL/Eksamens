@@ -1,19 +1,10 @@
-class CartItem:
-    def __init__(self, product, size, color):
-        self.name = product.name
-        self.price = product.price
-        self.size = size
-        self.color = color
-
-    def display_info(self):
-        return f"{self.name:<20}{self.size:<10}{self.color:<15}{self.price:<10.2f}"
-
+# cart.py faila saturs
 
 class Cart:
     def __init__(self):
         self.items = []
 
-    def add_item(self, item: CartItem):
+    def add_item(self, item):
         self.items.append(item)
 
     def remove_item(self, index):

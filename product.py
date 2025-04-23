@@ -1,3 +1,5 @@
+# products.py faila saturs
+
 import csv
 
 class Product:
@@ -19,7 +21,6 @@ class Product:
         sizes_display = ", ".join(f"{s} ({q})" for s, q in self.sizes.items() if q > 0) or "Nav pieejams"
         colors_display = ", ".join(self.colors)
         return f"{self.name:<20}{self.price:<10.2f}{sizes_display:<20}{colors_display:<30}"
-
 
 class ProductCollection:
     def __init__(self):
