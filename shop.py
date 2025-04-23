@@ -1,10 +1,25 @@
+from cart import Cart  # Importējam Cart klasi
+from product import ProductCollection  # Importējam ProductCollection klasi
+
 class Shop:
     def __init__(self, products):
         self.products = products
-        self.cart = cart()
-        self.products.load_from_csv(products)
+        self.cart = Cart()  # Tagad Python zin Cart klasi
         self.categories = self.products.get_categories()
         self.categories.sort()
+
+    def show_categories(self):
+        print("\nPieejamās kategorijas:")
+        for idx, category in enumerate(self.categories, start=1):
+            print(f"{idx}. {category}")
+
+    def display_products(self, products):
+        print("\nPieejamās preces:")
+        print(f"{'Prece':<20}{'Cena':<10}{'Izmērs':<20}{'Krāsa':<30}")
+        print("-" * 80)
+        for product in products:
+            print(product.display_info())
+
     def run(self):
         while True:
             print("\n--- Mūsu veikals ---")
@@ -18,7 +33,6 @@ class Shop:
             choice = input("\nIzvēlies darbību (1-6): ").strip()
 
             if choice == '1':
-                # Apskatīt visas preces, kuras ir pieejamas
                 available_products = [p for p in self.products.products if p.is_available()]
                 if available_products:
                     self.display_products(available_products)
@@ -29,19 +43,17 @@ class Shop:
                 self.cart.view()
 
             elif choice == '3':
-                # Parādīt kategorijas
-                categories = self.products.get_categories()
-                self.show_categories()
+                self.show_categories()  # Parādām kategorijas
 
                 try:
                     cat_choice = int(input("Izvēlies kategoriju: "))
-                    if 1 <= cat_choice <= len(categories):
-                        selected = categories[cat_choice - 1]
-                        filtered = self.products.filter_by_category(selected)
+                    if 1 <= cat_choice <= len(self.categories):
+                        selected_category = self.categories[cat_choice - 1]
+                        filtered_products = self.products.filter_by_category(selected_category)
 
-                        if filtered:
-                            self.display_products(filtered)
-                            self.handle_add_to_cart(filtered)
+                        if filtered_products:
+                            self.display_products(filtered_products)
+                            self.handle_add_to_cart(filtered_products)
                         else:
                             print("Šajā kategorijā nav pieejamu preču.")
                     else:
