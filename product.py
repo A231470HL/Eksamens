@@ -3,6 +3,16 @@
 import csv
 
 class Product:
+    # Kategoriju-krāsu kartējums
+    CATEGORY_COLORS = {
+        "Apģērbi": '\033[96m',  # Cyan
+        "Apavi": '\033[92m',    # Green
+        "Aksesuāri": '\033[35m',  # Magenta
+        "Elektronika": '\033[93m',  # Yellow
+        "Cits": '\033[97m',  # White (default)
+    }
+    RESET_COLOR = '\033[0m'  # Reset krāsa (balta)
+
     def __init__(self, name, price, category, sizes, colors):
         self.name = name
         self.price = price
@@ -20,7 +30,8 @@ class Product:
     def display_info(self):
         sizes_display = ", ".join(f"{s} ({q})" for s, q in self.sizes.items() if q > 0) or "Nav pieejams"
         colors_display = ", ".join(self.colors)
-        return f"{self.name:<20}{self.price:<10.2f}{sizes_display:<20}{colors_display:<30}"
+        color_code = self.CATEGORY_COLORS.get(self.category, self.RESET_COLOR)
+        return f"{color_code}{self.name:<20}{self.price:<10.2f}{sizes_display:<20}{colors_display:<30}{self.RESET_COLOR}"
 
 class ProductCollection:
     def __init__(self):

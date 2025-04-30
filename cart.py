@@ -1,6 +1,11 @@
 # cart.py faila saturs
 
 class Cart:
+    HEADER_COLOR = '\033[96m'  # Cyan
+    ITEM_COLOR = '\033[92m'    # Green
+    TOTAL_COLOR = '\033[93m'   # Yellow
+    RESET_COLOR = '\033[0m'    # Reset color
+
     def __init__(self):
         self.items = []
 
@@ -16,23 +21,23 @@ class Cart:
 
     def view(self):
         if self.is_empty():
-            print("Tavs grozs ir tukšs.")
+            print(self.HEADER_COLOR + "Tavs grozs ir tukšs." + self.RESET_COLOR)
             return
 
-        print("\nTavs grozs:")
-        print(f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Krāsa':<15}{'Cena':<10}")
-        print("-" * 60)
+        print(self.HEADER_COLOR + "\nTavs grozs:" + self.RESET_COLOR)
+        print(self.HEADER_COLOR + f"{'#':<5}{'Prece':<20}{'Izmērs':<10}{'Krāsa':<15}{'Cena':<10}" + self.RESET_COLOR)
+        print(self.HEADER_COLOR + "-" * 60 + self.RESET_COLOR)
         total = 0
         for idx, item in enumerate(self.items, start=1):
-            print(f"{idx:<5}{item.display_info()}")
+            print(self.ITEM_COLOR + f"{idx:<5}{item.display_info()}" + self.RESET_COLOR)
             total += item.price
-        print(f"\nKopējā summa: {total:.2f}€")
+        print(self.TOTAL_COLOR + f"\nKopējā summa: {total:.2f}€" + self.RESET_COLOR)
 
     def checkout(self):
         if self.is_empty():
-            print("Groziņš ir tukšs!")
+            print(self.HEADER_COLOR + "Groziņš ir tukšs!" + self.RESET_COLOR)
             return
         total = sum(item.price for item in self.items)
-        print(f"\nTavs kopējais pirkums ir: {total:.2f}€")
-        print("Paldies par iepirkšanos!")
+        print(self.TOTAL_COLOR + f"\nTavs kopējais pirkums ir: {total:.2f}€" + self.RESET_COLOR)
+        print(self.HEADER_COLOR + "Paldies par iepirkšanos!" + self.RESET_COLOR)
         self.items.clear()
