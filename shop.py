@@ -1,6 +1,7 @@
 from colorama import Fore, Style  # Importējam krāsu bibliotēku
 from cart import Cart  # Importējam Cart klasi no cart.py
 from product import ProductCollection  # Importējam ProductCollection klasi no products.py
+import os
 
 class Shop:
     def __init__(self, products):
@@ -20,6 +21,9 @@ class Shop:
 
     def run(self):
         while True:
+        # Clear the screen at the start of the loop
+            os.system('cls' if os.name == 'nt' else 'clear')
+
             print(Fore.CYAN + "\n--- Mūsu veikals ---" + Style.RESET_ALL)
             print(Fore.YELLOW + "1. Apskatīt visas pieejamās preces" + Style.RESET_ALL)
             print(Fore.BLUE + "2. Apskatīt grozu" + Style.RESET_ALL)
@@ -36,9 +40,11 @@ class Shop:
                     self.display_products(available_products)
                 else:
                     print(Fore.RED + "Nav nevienas pieejamas preces." + Style.RESET_ALL)
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
 
             elif choice == '2':
                 self.cart.view()
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
 
             elif choice == '3':
                 self.show_categories()
@@ -58,12 +64,15 @@ class Shop:
                         print(Fore.RED + "Nepareiza izvēle!" + Style.RESET_ALL)
                 except ValueError:
                     print(Fore.RED + "Lūdzu, ievadi skaitli!" + Style.RESET_ALL)
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
 
             elif choice == '4':
                 self.handle_remove_from_cart()
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
 
             elif choice == '5':
                 self.cart.checkout()
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
                 break
 
             elif choice == '6':
@@ -72,7 +81,10 @@ class Shop:
 
             else:
                 print(Fore.RED + "Nepareiza izvēle! Lūdzu, izvēlies no 1 līdz 6." + Style.RESET_ALL)
+                input(Fore.YELLOW + "\nNospied Enter, lai turpinātu..." + Style.RESET_ALL)
 
+        # Clear the screen after completing the action
+        os.system('cls' if os.name == 'nt' else 'clear')
     def display_products(self, products):
         print(Fore.CYAN + f"\n{'Prece':<20}{'Cena':<10}{'Izmērs':<20}{'Krāsa':<30}" + Style.RESET_ALL)
         print(Fore.YELLOW + "-" * 80 + Style.RESET_ALL)
