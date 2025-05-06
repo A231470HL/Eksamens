@@ -40,3 +40,17 @@ class Cart:
             total += item.price
         print(self.TOTAL_COLOR + f"\nKopējā summa: {total:.2f}€" + self.RESET_COLOR)
         print(self.HEADER_COLOR + f"Preču skaits: {self.get_item_count()}" + self.RESET_COLOR)
+        
+    def checkout(self):
+        """Veikt pirkumu un iztukšot grozu"""
+        if self.is_empty():
+            print(self.HEADER_COLOR + "Nevar veikt pirkumu, grozs ir tukšs." + self.RESET_COLOR)
+            return False
+            
+        # Veikt pirkumu
+        print(self.TOTAL_COLOR + "\nPaldies par pirkumu!" + self.RESET_COLOR)
+        print(self.HEADER_COLOR + f"Veiksmīgi iegādātas {self.get_item_count()} preces!" + self.RESET_COLOR)
+        
+        # Iztukšot grozu
+        self.items.clear()
+        return True
