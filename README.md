@@ -61,4 +61,4 @@ Katrai precei ir noteikti izmēri (S, M, L vai OneSize) un krāsu varianti.
 
 ## Izstrādātāji
 
-© 2025 Ralfs Konrads Haralds Labalaikis
+© 2025 Ralfs Konrads Haralds Labalaikis DP2-2
