@@ -103,7 +103,7 @@ class Shop:
                 color = input(Fore.RED + f"Izvēlies krāsu ({', '.join(selected_product.colors)}): " + Style.RESET_ALL).strip()
 
                 self.cart.add_item(CartItem(selected_product, size, color))
-                print(Fore.GREEN + f"Prece '{selected_product.name}' pievienota grozam." + Style.RESET_ALL)
+                print(Fore.RED + f"Prece '{selected_product.name}' pievienota grozam." + Style.RESET_ALL)
             else:
                 print(Fore.RED + "Nepareiza izvēle!" + Style.RESET_ALL)
         except ValueError:
