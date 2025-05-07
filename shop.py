@@ -315,7 +315,7 @@ class Shop:
         # Parādīt kopējo preču skaitu grozā
         items_count = len(self.cart.items)
         
-        print(Fore.CYAN + "\n----- Groza kopsavilkums -----" + Style.RESET_ALL)
+        print(Fore.RED + "\n----- Groza kopsavilkums -----" + Style.RESET_ALL)
         print(Fore.WHITE + f"Preču skaits grozā: {items_count}" + Style.RESET_ALL)
         print(Fore.RED + f"Kopējā summa (bez atlaides): {subtotal:.2f}€" + Style.RESET_ALL)
         
@@ -323,7 +323,7 @@ class Shop:
             print(Fore.WHITE + f"Atlaide ({discount_percentage}%): -{discount_amount:.2f}€" + Style.RESET_ALL)
         
         print(Fore.RED + f"Piegāde ({self.selected_shipping}): {shipping_cost:.2f}€" + Style.RESET_ALL)
-        print(Fore.CYAN + f"KOPĀ APMAKSAI: {total:.2f}€" + Style.RESET_ALL)
+        print(Fore.WHITE + f"KOPĀ APMAKSAI: {total:.2f}€" + Style.RESET_ALL)
         
         # Papildu aprēķins - vidējā preces cena grozā
         if items_count > 0:
@@ -367,7 +367,7 @@ class Shop:
                         # Samazinām pieejamo daudzumu
                         selected_product.reduce_stock(size)
                         
-                        print(Fore.GREEN + f"Prece '{selected_product.name}' pievienota grozam." + Style.RESET_ALL)
+                        print(Fore.RED + f"Prece '{selected_product.name}' pievienota grozam." + Style.RESET_ALL)
                     else:
                         print(Fore.RED + f"Krāsa '{color}' nav pieejama!" + Style.RESET_ALL)
                 else:
